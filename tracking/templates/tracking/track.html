@@ -1,0 +1,87 @@
+{% extends 'tracking/base.html' %}
+{% load static %}
+
+{% block title %}Track Your Parcel{% endblock %}
+
+{% block content %}
+<style>
+  .form-control-lg {
+    font-size: 1.25rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 576px) {
+    .form-control-lg {
+      font-size: 1.1rem;
+      padding: 0.9rem 1rem;
+    }
+
+    .btn-lg {
+      font-size: 1rem;
+      padding: 0.65rem 1.5rem;
+    }
+  }
+</style>
+
+<!-- Hero Section Start -->
+ <div class="container-fluid p-0 mb-5">
+  <div class="position-relative">
+    <img src="{% static 'images/carousel-1.jpg' %}" class="img-fluid w-100" style="height: 420px; object-fit: cover;" alt="Contact Hero Image">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+    <div class="position-absolute top-50 start-0 translate-middle-y text-start text-white ps-5">
+      <h1 class="display-2 fw-bold animate__animated animate__fadeInDown">Track Shipment</h1>
+      <nav aria-label="breadcrumb" class="animate__animated animate__fadeInUp mt-2">
+        <ol class="breadcrumb text-uppercase text-white mb-0 fw-semibold fs-6">
+          <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item text-white active" aria-current="page">/ Track</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+<!-- Hero Section End -->
+
+<!-- Tracking Form Section Start -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="text-primary text-uppercase fw-semibold" style="font-size: 18px;">Live Tracking</h2>
+      <h1 class="mb-3 fw-bold" style="font-size: 42px;">Enter Your Tracking Number</h1>
+      <p class="lead" style="font-size: 20px;">Track your parcel in real-time. We provide instant shipment updates and accurate delivery estimates.</p>
+    </div>
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-8 col-md-10">
+        <form method="POST" action="{% url 'track' %}" class="bg-white p-5 shadow-lg rounded-4">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="trackingNumber" class="form-label fw-bold" style="font-size: 20px;">Tracking Number</label>
+            <input 
+              type="text" 
+              class="form-control form-control-lg fw-bold text-center" 
+              id="trackingNumber" 
+              name="tracking_number" 
+              placeholder="Enter Tracking No" 
+              required
+            >
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-danger btn-lg fw-bold" style="letter-spacing: 1px;">Track</button>
+          </div>
+          {% if error %}
+            <div class="alert alert-danger text-center mt-4">{{ error }}</div>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Tracking Form Section End -->
+
+
+{% endblock %}

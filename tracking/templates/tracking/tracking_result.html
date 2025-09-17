@@ -1,0 +1,63 @@
+{% extends 'tracking/base.html' %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="fw-bold text-primary">Shipment Tracking Details</h2>
+      <p class="lead">Real-time information about your parcel.</p>
+    </div>
+
+    {% if shipment %}
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-6 col-md-8">
+        <div class="card border-0 shadow-lg rounded-4 bg-white p-4">
+          <div class="card-body text-start">
+
+            <div class="mb-3">
+              <h5 class="fw-bold text-uppercase text-muted small">Tracking Number</h5>
+              <p class="fs-5 fw-semibold text-dark">{{ shipment.tracking_number }}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="fw-bold text-uppercase text-muted small">Sender</h6>
+              <p>{{ shipment.sender_name }}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="fw-bold text-uppercase text-muted small">Receiver</h6>
+              <p>{{ shipment.receiver_name }}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="fw-bold text-uppercase text-muted small">Origin</h6>
+              <p>{{ shipment.origin }}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="fw-bold text-uppercase text-muted small">Destination</h6>
+              <p>{{ shipment.destination }}</p>
+            </div>
+
+            <div class="mb-3">
+              <h6 class="fw-bold text-uppercase text-muted small">Status</h6>
+              <p class="badge bg-success text-white fs-6 py-2 px-3 rounded-pill">{{ shipment.status }}</p>
+            </div>
+
+            <div>
+              <h6 class="fw-bold text-uppercase text-muted small">Last Updated</h6>
+              <p>{{ shipment.last_updated|date:"F j, Y, g:i A" }}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="text-center">
+      <p class="text-danger fw-bold">Tracking information not found.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

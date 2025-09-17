@@ -1,0 +1,86 @@
+{% extends 'tracking/base.html' %}
+{% load static %}
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section with Overlay (Left-Aligned Text) -->
+<div class="container-fluid p-0 mb-5">
+  <div class="position-relative">
+    <img src="{% static 'images/carousel-1.jpg' %}" class="img-fluid w-100" style="height: 420px; object-fit: cover;" alt="Contact Hero Image">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+    <div class="position-absolute top-50 start-0 translate-middle-y text-start text-white ps-5">
+      <h1 class="display-2 fw-bold animate__animated animate__fadeInDown">Contact Us</h1>
+      <nav aria-label="breadcrumb" class="animate__animated animate__fadeInUp mt-2">
+        <ol class="breadcrumb text-uppercase text-white mb-0 fw-semibold fs-6">
+          <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item text-white active" aria-current="page">/ Contact</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Info and Form -->
+<div class="container-xxl py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h6 class="text-primary text-uppercase animate__animated animate__fadeInDown">Get In Touch</h6>
+      <h1 class="mb-4 animate__animated animate__fadeInUp">Contact For Any Query</h1>
+    </div>
+
+    <!-- Success Message -->
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="row g-5">
+      <!-- Contact Info -->
+      <div class="col-lg-4 col-md-6 animate__animated animate__fadeInLeft" data-wow-delay="0.3s">
+        <h5 class="mb-3"><i class="fa fa-map-marker-alt text-danger me-2"></i>Our Office</h5>
+        <p>123 Logistics Avenue, Ikeja, Lagos, Nigeria</p>
+
+        <h5 class="mb-3 mt-4"><i class="fa fa-phone-alt text-danger me-2"></i>Call Us</h5>
+        <p>+234 123 4567 890</p>
+
+        <h5 class="mb-3 mt-4"><i class="fa fa-envelope text-danger me-2"></i>Email Us</h5>
+        <p>info@logistica.com</p>
+
+        <h5 class="mb-3 mt-4"><i class="fa fa-clock text-danger me-2"></i>Working Hours</h5>
+        <p>Mon - Sat: 8am - 6pm<br>Sunday: Closed</p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-lg-8 col-md-6 animate__animated animate__fadeInRight" data-wow-delay="0.5s">
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              {{ form.name }}
+              {{ form.name.errors }}
+            </div>
+            <div class="col-md-6">
+              {{ form.email }}
+              {{ form.email.errors }}
+            </div>
+            <div class="col-12">
+              {{ form.subject }}
+              {{ form.subject.errors }}
+            </div>
+            <div class="col-12">
+              {{ form.message }}
+              {{ form.message.errors }}
+            </div>
+            <div class="col-12">
+              <button class="btn btn-danger w-100 py-3" type="submit">Send Message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

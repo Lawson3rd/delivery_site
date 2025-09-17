@@ -1,0 +1,133 @@
+{% extends 'tracking/base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<!-- About Us Hero Start -->
+<div class="container-fluid page-header position-relative py-7 mb-5 wow fadeIn" data-wow-delay="0.1s"
+     style="background: url('{% static 'images/carousel-1.jpg' %}') center center no-repeat; background-size: cover; height: 500px;">
+
+  <!-- Overlay -->
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.6); z-index: 1;"></div>
+
+  <!-- Content -->
+  <div class="container h-100 d-flex align-items-center position-relative" style="z-index: 2;">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="display-2 fw-bolder text-white mb-3 animate__animated animate__fadeInDown text-nowrap">About Us</h1>
+        <nav aria-label="breadcrumb" class="animate__animated animate__fadeInUp animate__delay-1s">
+          <ol class="breadcrumb mb-0" style="--bs-breadcrumb-divider: '/'; --bs-breadcrumb-divider-color: white;">
+            <li class="breadcrumb-item fw-bold">
+              <a class="text-white text-decoration-none" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="breadcrumb-item fw-bold text-white active" aria-current="page">About</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- About Us Hero End -->
+
+
+<!-- About Us Start -->
+<div class="container-xxl py-5" id="about">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+
+      <!-- Left Image with animation -->
+      <div class="col-lg-6 wow animate__animated animate__fadeInLeft" data-wow-delay="0.2s">
+        <img src="{% static 'images/about.jpg' %}" alt="About Us Image"
+             class="img-fluid w-100"
+             style="object-fit: cover; max-width: 100%; display: block;">
+      </div>
+
+      <!-- Right Content with animation -->
+      <div class="col-lg-6 wow animate__animated animate__fadeInRight" data-wow-delay="0.4s">
+        <h6 class="text-primary text-uppercase mb-3">About Us</h6>
+        <h1 class="mb-4">Reliable Transport & Logistics Solutions</h1>
+        <p class="mb-4">
+          At Logistica, we specialize in fast, reliable, and secure delivery services tailored to your needs. 
+          Whether you're shipping across the city or around the globe, we make sure your packages arrive safely and on time.
+          Our mission is to connect people and businesses through efficient logistics, driven by technology and a commitment to excellence.
+        </p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-sm-6 wow animate__animated animate__zoomIn" data-wow-delay="0.5s">
+            <div class="d-flex align-items-center">
+              <div class="btn-lg-square bg-danger text-white rounded-circle me-3">
+                <i class="fa fa-globe"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">Global Coverage</h5>
+                <p class="mb-0">We deliver to over 120 countries with full tracking and real-time updates.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 wow animate__animated animate__zoomIn" data-wow-delay="0.6s">
+            <div class="d-flex align-items-center">
+              <div class="btn-lg-square bg-danger text-white rounded-circle me-3">
+                <i class="fa fa-shipping-fast"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">On Time Delivery</h5>
+                <p class="mb-0">From express shipping to scheduled freight — we guarantee prompt delivery.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="btn btn-danger py-3 px-5" href="#services">Explore More</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- About Us End -->
+
+<!-- Our History Section Start -->
+<section class="container-xxl py-5" id="history">
+  <div class="container">
+    <div class="text-center mb-5 wow animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+      <h6 class="text-primary text-uppercase">Our History</h6>
+      <h1 class="mb-4 fw-bold">Milestones & Journey</h1>
+      <p class="lead">Take a look at how far we’ve come and what continues to drive us forward.</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-6 wow animate__animated animate__fadeInLeft" data-wow-delay="0.2s">
+        <div class="border-start border-3 border-danger ps-4">
+          <h4 class="fw-bold text-dark">Founded in 2010</h4>
+          <p class="text-muted mb-3">We started with a simple mission: to simplify logistics for businesses of all sizes.</p>
+        </div>
+        <div class="border-start border-3 border-danger ps-4 mt-4">
+          <h4 class="fw-bold text-dark">2015 – Expansion</h4>
+          <p class="text-muted mb-3">Expanded services across Africa, added air freight and e-commerce logistics.</p>
+        </div>
+        <div class="border-start border-3 border-danger ps-4 mt-4">
+          <h4 class="fw-bold text-dark">2018 – Global Reach</h4>
+          <p class="text-muted mb-3">Entered international markets with partnerships in Europe and Asia.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 wow animate__animated animate__fadeInRight" data-wow-delay="0.4s">
+        <div class="border-start border-3 border-danger ps-4">
+          <h4 class="fw-bold text-dark">2020 – Tech Integration</h4>
+          <p class="text-muted mb-3">Launched real-time tracking system and logistics automation tools.</p>
+        </div>
+        <div class="border-start border-3 border-danger ps-4 mt-4">
+          <h4 class="fw-bold text-dark">2023 – Sustainability</h4>
+          <p class="text-muted mb-3">Introduced eco-friendly delivery solutions and carbon-neutral operations.</p>
+        </div>
+        <div class="border-start border-3 border-danger ps-4 mt-4">
+          <h4 class="fw-bold text-dark">Today</h4>
+          <p class="text-muted mb-0">Serving over 50 countries with fast, reliable, and innovative logistics solutions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Our History Section End -->
+
+{% endblock %}
