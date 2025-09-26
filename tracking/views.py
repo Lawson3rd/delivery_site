@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import TrackingForm, ContactForm
 from .models import Shipment, ContactMessage
 
+
 def home(request):
     fact_labels = ['Happy Clients', 'Projects', 'Team Members', 'Awards']
     return render(request, 'tracking/home.html', {
@@ -11,32 +12,44 @@ def home(request):
         'fact_labels': fact_labels,
     })
 
+
 def about(request):
     return render(request, 'tracking/about.html')
+
 
 def services(request):
     return render(request, 'tracking/services.html')
 
+
+def track(request):
+    """Simple page with tracking form"""
+    return render(request, 'tracking/track.html', {'form': TrackingForm()})
+
+
 def contact(request):
-    form = ContactForm()
+    """Contact form handler"""
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            ContactMessage.objects.create(
-                name=form.cleaned_data['name'],
-                email=form.cleaned_data['email'],
-                subject=form.cleaned_data['subject'],
-                message=form.cleaned_data['message']
-            )
+            ContactMessage.objects.create(**form.cleaned_data)
             messages.success(request, 'Your message has been sent successfully!')
             return redirect('contact')
+    else:
+        form = ContactForm()
+
     return render(request, 'tracking/contact.html', {'form': form})
 
+
 def track_shipment(request):
+    """Handles tracking form submission"""
     if request.method == 'POST':
         tracking_number = request.POST.get('tracking_number')
         try:
             shipment = Shipment.objects.get(tracking_number=tracking_number)
+
+            # ✅ Use progress_percent field from model
+            shipment.progress_width = f"{shipment.progress_percent}%"
+
             return render(request, 'tracking/tracking_result.html', {'shipment': shipment})
         except Shipment.DoesNotExist:
             error = 'Tracking number not found.'
@@ -46,7 +59,12 @@ def track_shipment(request):
             })
     return render(request, 'tracking/track.html', {'form': TrackingForm()})
 
-def tracking_result(request):
-    tracking_number = request.GET.get('tracking_number')
+
+def tracking_result(request, tracking_number):
+    """Direct tracking URL: /tracking/<tracking_number>/"""
     shipment = get_object_or_404(Shipment, tracking_number=tracking_number)
+
+    # ✅ Use progress_percent field from model
+    shipment.progress_width = f"{shipment.progress_percent}%"
+
     return render(request, 'tracking/tracking_result.html', {'shipment': shipment})

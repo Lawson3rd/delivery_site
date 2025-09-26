@@ -1,63 +1,139 @@
 {% extends 'tracking/base.html' %}
+{% load static %}
 
 {% block content %}
 <section class="py-5 bg-light">
   <div class="container">
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h2 class="fw-bold text-primary">Shipment Tracking Details</h2>
-      <p class="lead">Real-time information about your parcel.</p>
+    <!-- Hero Section Start -->
+ <div class="container-fluid p-0 mb-5">
+  <div class="position-relative">
+    <img src="{% static 'images/carousel-1.jpg' %}" class="img-fluid w-100" style="height: 420px; object-fit: cover;" alt="Contact Hero Image">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+    <div class="position-absolute top-50 start-0 translate-middle-y text-start text-white ps-5">
+      <h1 class="display-2 fw-bold animate__animated animate__fadeInDown">Track Shipment</h1>
+      <nav aria-label="breadcrumb" class="animate__animated animate__fadeInUp mt-2">
+        <ol class="breadcrumb text-uppercase text-white mb-0 fw-semibold fs-6">
+          <li class="breadcrumb-item"><a href="/" class="text-white text-decoration-none">Home</a></li>
+          <li class="breadcrumb-item text-white active" aria-current="page">/ Track</li>
+        </ol>
+      </nav>
     </div>
+  </div>
+</div>
+<!-- Hero Section End -->
 
-    {% if shipment %}
-    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
-      <div class="col-lg-6 col-md-8">
-        <div class="card border-0 shadow-lg rounded-4 bg-white p-4">
-          <div class="card-body text-start">
-
-            <div class="mb-3">
-              <h5 class="fw-bold text-uppercase text-muted small">Tracking Number</h5>
-              <p class="fs-5 fw-semibold text-dark">{{ shipment.tracking_number }}</p>
-            </div>
-
-            <div class="mb-3">
-              <h6 class="fw-bold text-uppercase text-muted small">Sender</h6>
-              <p>{{ shipment.sender_name }}</p>
-            </div>
-
-            <div class="mb-3">
-              <h6 class="fw-bold text-uppercase text-muted small">Receiver</h6>
-              <p>{{ shipment.receiver_name }}</p>
-            </div>
-
-            <div class="mb-3">
-              <h6 class="fw-bold text-uppercase text-muted small">Origin</h6>
-              <p>{{ shipment.origin }}</p>
-            </div>
-
-            <div class="mb-3">
-              <h6 class="fw-bold text-uppercase text-muted small">Destination</h6>
-              <p>{{ shipment.destination }}</p>
-            </div>
-
-            <div class="mb-3">
-              <h6 class="fw-bold text-uppercase text-muted small">Status</h6>
-              <p class="badge bg-success text-white fs-6 py-2 px-3 rounded-pill">{{ shipment.status }}</p>
-            </div>
-
-            <div>
-              <h6 class="fw-bold text-uppercase text-muted small">Last Updated</h6>
-              <p>{{ shipment.last_updated|date:"F j, Y, g:i A" }}</p>
-            </div>
-
-          </div>
+    <!-- Receiver & Sender Info -->
+    <div class="row justify-content-center mb-4" data-aos="fade-up">
+      <div class="col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 p-4">
+          <h5 class="fw-bold text-primary mb-3">Sender Details</h5>
+          <p><strong>Name:</strong> {{ shipment.receiver_name }}</p>
+          <p><strong>Origin:</strong> {{ shipment.origin }}</p>
+          <hr>
+          <h5 class="fw-bold text-secondary mb-3">Receiver Details</h5>
+          <p><strong>Destination:</strong> {{ shipment.destination }}</p>
+          <p><strong>Name:</strong> {{ shipment.sender_name }}</p>
+          <p><strong>Email:</strong> {{ shipment.email }}</p>
+          <p><strong>Phone:</strong> {{ shipment.phone }}</p>
+          <p><strong>Date:</strong> {{ shipment.date }}</p>
         </div>
       </div>
     </div>
-    {% else %}
-    <div class="text-center">
-      <p class="text-danger fw-bold">Tracking information not found.</p>
+
+    <!-- Progress Bar -->
+    <div class="row justify-content-center mb-5" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-10">
+        <div class="progress-container position-relative">
+          <div class="progress-bar" style="width: {{ shipment.progress_width }}"></div>
+          <div class="truck-icon" id="truck">
+            🚚
+          </div>
+        </div>
+
+        <ul class="progress-steps d-flex justify-content-between mt-3 list-unstyled">
+          <li {% if shipment.status == "Order Placed" %}class="text-primary fw-bold"{% endif %}>Order Placed<p>2:00pm.Sept,26,2025</p></li>
+          <li {% if shipment.status == "Out for Delivery" %}class="text-primary fw-bold"{% endif %}>Out for Delivery</li>
+          <li {% if shipment.status == "Delivered" %}class="text-primary fw-bold"{% endif %}>Delivered</li>
+      </div>
     </div>
-    {% endif %}
+
   </div>
 </section>
+
+<style>
+/* Default font size for desktop */
+.progress-steps li {
+    font-size: 16px;
+}
+
+/* Smaller text for phones */
+@media (max-width: 576px) { /* Bootstrap's xs breakpoint */
+    .progress-steps li {
+        font-size: 12px; /* shrink text */
+    }
+    .progress-steps li p {
+        font-size: 10px; /* shrink timestamp */
+    }
+}
+.progress-container {
+  position: relative;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 50px;
+}
+.progress-bar {
+  height: 6px;
+  background: #0d6efd;
+  border-radius: 50px;
+  transition: width 1.5s ease-in-out;
+}
+.truck-icon {
+  position: absolute;
+  top: -28px;
+  font-size: 28px;
+  left: 0;
+  transform: scaleX(-1); /* Flip truck to face right */
+}
+.progress-steps li {
+  font-size: 14px;
+  color: #6c757d;
+  text-align: center;
+  flex: 1;
+}
+.timeline {
+  border-left: 3px solid #0d6efd;
+  padding-left: 15px;
+}
+.timeline li {
+  position: relative;
+}
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -9px;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  background: #0d6efd;
+  border-radius: 50%;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const truck = document.getElementById("truck");
+  const stopPosition = parseInt("{{ shipment.progress_percent }}"); // from admin
+  let current = 0;
+
+  function moveTruck() {
+    if (current <= stopPosition) {
+      truck.style.left = current + "%";
+      current += 5; // step by 5%
+      setTimeout(moveTruck, 500); // pause every 0.5s
+    }
+  }
+
+  moveTruck();
+});
+</script>
 {% endblock %}
